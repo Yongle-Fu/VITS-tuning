@@ -146,6 +146,7 @@ def tag_cke(text,prev_sentence=None):
 
 
 def load_checkpoint(checkpoint_path, model, optimizer=None, drop_speaker_emb=False):
+    print(checkpoint_path)
     assert os.path.isfile(checkpoint_path)
     checkpoint_dict = torch.load(checkpoint_path, map_location='cpu')
     iteration = checkpoint_dict['iteration']
@@ -361,7 +362,7 @@ def get_logger(model_dir, filename="train.log"):
     formatter = logging.Formatter("%(asctime)s\t%(name)s\t%(levelname)s\t%(message)s")
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    h = logging.FileHandler(os.path.join(model_dir, filename))
+    h = logging.FileHandler(os.path.join(model_dir, filename), encoding='utf-8')
     h.setLevel(logging.DEBUG)
     h.setFormatter(formatter)
     logger.addHandler(h)

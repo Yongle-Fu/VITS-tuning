@@ -3,7 +3,12 @@ import numpy as np
 import torch
 from torch import no_grad, LongTensor
 import argparse
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))  # 将父级目录加入执行目录列表
+print(str(Path(__file__).resolve().parents[1]))
 import commons
+
 from mel_processing import spectrogram_torch
 import utils
 from models import SynthesizerTrn
@@ -11,16 +16,19 @@ import gradio as gr
 import librosa
 import webbrowser
 
+
 from text import text_to_sequence, _clean_text
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 language_marks = {
-    "Japanese": "",
-    "日本語": "[JA]",
+    # "Japanese": "",
+    # "日本語": "[JA]",
     "简体中文": "[ZH]",
     "English": "[EN]",
     "Mix": "",
 }
-lang = ['日本語', '简体中文', 'English', 'Mix']
+lang = ['简体中文', 'English', 'Mix']
+# lang = ['日本語', '简体中文', 'English', 'Mix']
+
 def get_text(text, hps, is_symbol):
     text_norm = text_to_sequence(text, hps.symbols, [] if is_symbol else hps.data.text_cleaners)
     if hps.data.add_blank:

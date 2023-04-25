@@ -1,3 +1,26 @@
+```shell
+# 将所有视频（无论是上传的还是下载的，且必须是.mp4格式）抽取音频
+python scripts/video2audio.py
+# 将所有音频（无论是上传的还是从视频抽取的，必须是.wav格式）去噪
+python scripts/denoise_audio.py
+# 分割并标注长音频
+python scripts/long_audio_transcribe.py
+# 底模采样率可能与辅助数据不同，需要重采样
+python scripts/resample.py
+
+tensorboard --logdir "./OUTPUT_MODEL"
+netstat -ano | findstr :8000
+
+python scripts/preprocess_v2.py --add_auxiliary_data True
+python finetune_speaker_v2.py -m "./OUTPUT_MODEL" --max_epochs 100 --drop_speaker_embed True
+
+python scripts/rearrange_speaker.py
+python scripts/VC_inference.py --model_dir ./OUTPUT_MODEL/G_latest.pth
+python scripts/VC_inference.py --model_dir ./pretrained_models/lyh-colab/G_latest.pth
+python scripts/VC_inference.py --model_dir ./pretrained_models/lyh_48mins/G_latest.pth --config_dir ./pretrained_models/lyh_48mins/finetune_speaker.json 
+python scripts/VC_inference.py --model_dir ./G_latest.pth
+```
+
 [中文文档请点击这里](https://github.com/Plachtaa/VITS-fast-fine-tuning/blob/main/README_ZH.md)
 # VITS Fast Fine-tuning
 This repo will guide you to add your own character voices, or even your own voice, into existing VITS TTS model

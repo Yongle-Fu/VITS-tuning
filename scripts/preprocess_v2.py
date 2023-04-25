@@ -1,10 +1,15 @@
 import os
 import argparse
 import json
+import sys
+
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))  # 将父级目录加入执行目录列表
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--add_auxiliary_data", type=bool, help="Whether to add extra data as fine-tuning helper")
-    parser.add_argument("--languages", default="CJE")
+    parser.add_argument("--languages", default="C")
     args = parser.parse_args()
     if args.languages == "CJE":
         langs = ["[ZH]", "[JA]", "[EN]"]
