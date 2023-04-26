@@ -1,9 +1,9 @@
 # Default ignored files
-
 .vscode/extensions.json
 build/
 __pycache__/
-OUTPUT_MODEL/
+text/__pycache__/
+monotonic_align/build/
 monotonic_align/monotonic_align/
 monotonic_align/core.c
 monotonic_align/core.cp37-win_amd64.pyd
@@ -12,6 +12,7 @@ sampled_audio4ft.txt
 final_annotation_val.txt
 final_annotation_train.txt
 long_character_anno.txt
+finetune_speaker.json
 G_latest.pth
 pretrained_models/
 sampled_audio4ft/
@@ -21,4 +22,9 @@ segmented_character_voice/
 video_data/
 separated/htdemucs/
 backup/
+OUTPUT_MODEL/
 OUTPUT_0424/
+500-es.zip
+500-es/
+colab/
+lyh_0424/

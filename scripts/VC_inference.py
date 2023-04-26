@@ -22,12 +22,15 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 language_marks = {
     # "Japanese": "",
     # "日本語": "[JA]",
+    # "Japanese": "",
+    # "日本語": "[JA]",
     "简体中文": "[ZH]",
     "English": "[EN]",
     "Mix": "",
 }
-lang = ['简体中文', 'English', 'Mix']
 # lang = ['日本語', '简体中文', 'English', 'Mix']
+lang = ["简体中文", "English", "Mix"]
+
 
 def get_text(text, hps, is_symbol):
     text_norm = text_to_sequence(text, hps.symbols, [] if is_symbol else hps.data.text_cleaners)
@@ -112,9 +115,13 @@ if __name__ == "__main__":
         with gr.Tab("Text-to-Speech"):
             with gr.Row():
                 with gr.Column():
-                    textbox = gr.TextArea(label="Text",
-                                          placeholder="Type your sentence here",
-                                          value="こんにちわ。", elem_id=f"tts-input")
+                    textbox = gr.TextArea(
+                        label="Text",
+                        placeholder="Type your sentence here",
+                        value="大家好 我是开星果脑博士 脑机接口技术可以为自闭症儿童 来自星星的孩子带来许多帮助",
+                        # value="你好 我是老罗 脑机接口技术可以为星辰大海带来许多潜在的赋能 尤其是在太空探索和开发方面",
+                        elem_id=f"tts-input",
+                    )
                     # select character
                     char_dropdown = gr.Dropdown(choices=speakers, value=speakers[0], label='character')
                     language_dropdown = gr.Dropdown(choices=lang, value=lang[0], label='language')
